@@ -13,7 +13,8 @@
     <div class="container" ng-controller="QueryBuilderCtrl">
     <h1>Angular.js Query Builder</h1>
 
-        <div class="alert alert-info">
+        <div class="panel panel-info">
+          <div class="panel-body bg-info">
             <div class="input-group input-group-lg">
               <span class="input-group-addon" id="sizing-addon1">
                 <i class="glyphicon glyphicon-riflescope"></i>
@@ -25,13 +26,15 @@
             <br />
             <strong>Optimized Rule</strong><br>
             <div class="well well-lg"><span ng-bind-html="output"></span></div>
+          </div>
         </div>
 
         <query-builder group="filter.group"></query-builder>
     </div>
 
     <script type="text/ng-template" id="/queryBuilderDirective.html">
-    <div class="alert alert-warning alert-group">
+    <div class="panel panel-warning">
+      <div class="panel-body bg-warning">
         <div class="form-inline">
             <select ng-options="o.name as o.name for o in operators" ng-model="group.operator" class="form-control input-sm"></select>
             <button style="margin-left: 5px" ng-click="addCondition()" class="btn btn-sm btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Add Condition</button>
@@ -55,6 +58,7 @@
                 </div>
             </div>
         </div>
+      </div>
     </div>
     </script>
 
