@@ -1,0 +1,21 @@
+{
+  "name": "angular-query-builder",
+  "main": "angular-query-builder.js",
+  "homepage": "https://github.com/mautematico/angular-query-builder",
+  "authors": [
+    "Matthieu Fauveau (https://github.com/mfauveau)",
+    "Mauricio Navarro Miranda <mauricio@navarromiranda.mx> (https://blog.mautematico.com)"
+  ],
+  "description": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jsep": "https://github.com/soney/jsep.git#v0.3.0"
+  }
+}

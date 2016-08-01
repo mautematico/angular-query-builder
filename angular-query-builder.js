@@ -1,6 +1,8 @@
 var app = angular.module('app', ['ngSanitize', 'queryBuilder']);
 app.controller('QueryBuilderCtrl', ['$scope', function ($scope) {
     var data = '{"group": {"operator": "AND","rules": []}}';
+    var translator = new AstToPolishQueryTreeTranslator();
+    $scope.query = '';
 
     function htmlEntities(str) {
         return String(str).replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -21,6 +23,16 @@ app.controller('QueryBuilderCtrl', ['$scope', function ($scope) {
     $scope.json = null;
 
     $scope.filter = JSON.parse(data);
+
+    $scope.parseQuery = function(){
+      var ast = translator.jsep($scope.query);
+      $scope.filter = translator.astToPolishQueryTree(
+        null,
+        ast,
+        (new PolishNode(null, null))
+      );
+      //$scope.$watch('filter') will take care of the rest
+    };
 
     $scope.$watch('filter', function (newValue) {
         $scope.json = JSON.stringify(newValue, null, 2);

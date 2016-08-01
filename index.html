@@ -14,8 +14,17 @@
     <h1>Angular.js Query Builder</h1>
 
         <div class="alert alert-info">
-            <strong>Example Output</strong><br>
-            <span ng-bind-html="output"></span>
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon" id="sizing-addon1">
+                <i class="glyphicon glyphicon-riflescope"></i>
+                <span class="glyphicon glyphicon-tasks"></span>
+              </span>
+              <input type="text" ng-model="query" ng-change="parseQuery()" class="form-control" placeholder="Query Input">
+            </div>
+
+            <br />
+            <strong>Optimized Rule</strong><br>
+            <div class="well well-lg"><span ng-bind-html="output"></span></div>
         </div>
 
         <query-builder group="filter.group"></query-builder>
@@ -49,6 +58,10 @@
     </div>
     </script>
 
+    <script src="bower_components/jsep/build/jsep.min.js"></script>
+    <script src="js/polyfill.js"></script>
+    <script src="js/PolishNode.js"></script>
+    <script src="js/AstToPolishQueryTreeTranslator.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular-sanitize.min.js"></script>
     <script src="angular-query-builder.js"></script>
