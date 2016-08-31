@@ -51,9 +51,9 @@ AstToPolishQueryTreeTranslator.prototype = {
       //Sure we can optimize this code and merge @note:single rule check into one single piece of code. DRY.
       if(this.mathematical.includes(nOp)){
         polish.setOperator('AND');
-        polish.addChild({field: n.left.name, condition:n.operator,
-          data: (!n.right.name) ? n.right.value : (n.right.name)
-        });
+        polish.addChild(
+            this.astNodeToPolishQueryTreeRule(n)
+        );
       return polish;
       }
 
@@ -69,21 +69,28 @@ AstToPolishQueryTreeTranslator.prototype = {
       //@note:single rule check
       //if n.left's 'root' is a mathematical operator, n.left shall be a 'single rule' like `(Firstname = Mauricio)`
       if (this.mathematical.includes(n.left.operator)) {
-          polishNode.addChild({field: n.left.left.name, condition:n.left.operator,
-            data: (!n.left.right.name) ? n.left.right.value : (n.left.right.name)
-          });
+          polishNode.addChild(
+              this.astNodeToPolishQueryTreeRule(n.left)
+          );
       } else {
           //if n.left's root is not a mathematical operator, it shall be a logical one. Then let's go recursive.
           this.astToPolishQueryTree(n, n.left, polishNode);
       }
       if (this.mathematical.includes(n.right.operator)) {
-          polishNode.addChild({field: n.right.left.name, condition:n.right.operator,
-            data: (!n.right.right.name) ? n.right.right.value : (n.right.right.name)
-          });
+          polishNode.addChild(
+              this.astNodeToPolishQueryTreeRule(n.right)
+          );
       } else {
           this.astToPolishQueryTree(n, n.right, polishNode);
       }
 
       return polish;
+  },
+  astNodeToPolishQueryTreeRule: function (astNode) {
+      return {
+          field: astNode.left.name,
+          condition: astNode.operator,
+          data: (!astNode.right.name) ? astNode.right.value : (astNode.right.name)
+      };
   }
 };
